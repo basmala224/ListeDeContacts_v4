@@ -1,11 +1,6 @@
 # Compte rendu — TP Android Contacts V4
 
 **Étudiante :** Aouida Basmala  
-**Dépôt GitHub :** _à compléter_
-
-> Captures réelles réalisées le 18/11/2026 sur l'émulateur *Medium Phone* (Android 37), application
-> `com.example.contactsv4` **versionName 4.0 / versionCode 4** (vérifié avec `adb shell dumpsys package`).
-> Elles sont dans `docs/captures/` et présentées en section 10. Exporter ce fichier en PDF pour le dépôt.
 
 ## 1. Schéma de la base et choix des types
 

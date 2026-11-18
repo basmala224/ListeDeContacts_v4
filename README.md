@@ -14,9 +14,6 @@
 Terminal : `./gradlew installDebug` puis `adb shell am start -n com.example.contactsv4/.MainActivity`.
 Tests unitaires : `./gradlew test`.
 
-> Le package est `com.example.contactsv4` : la V3 et la V4 peuvent être installées côte à côte.
-> Si vous modifiez le schéma pendant le développement, désinstallez l'application ou incrémentez
-> `DATABASE_VERSION` (onCreate n'est appelé que si `contacts.db` n'existe pas).
 
 ## Clé Google Maps
 Lue dans `local.properties` (ignoré par Git) et injectée dans le manifeste via `manifestPlaceholders`.
