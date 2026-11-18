@@ -3,7 +3,9 @@
 **Étudiante :** Aouida Basmala  
 **Dépôt GitHub :** _à compléter_
 
-> Insérer les captures réelles dans `docs/captures/`, puis exporter ce fichier en PDF.
+> Captures réelles réalisées le 18/11/2026 sur l'émulateur *Medium Phone* (Android 37), application
+> `com.example.contactsv4` **versionName 4.0 / versionCode 4** (vérifié avec `adb shell dumpsys package`).
+> Elles sont dans `docs/captures/` et présentées en section 10. Exporter ce fichier en PDF pour le dépôt.
 
 ## 1. Schéma de la base et choix des types
 
@@ -92,29 +94,45 @@ elle deviendrait préférable pour un très grand nombre de contacts.
 
 ## 7. Tests réalisés
 
-| # | Test | Résultat attendu | OK |
-|---|---|---|---|
-| 1 | Premier lancement / deuxième lancement | 6 contacts de démo, pas de doublon | ☐ |
-| 2 | Ajouter (« + »), modifier, supprimer puis fermer l'app (récents) | chaque opération persiste | ☐ |
-| 3 | Nom « L'Ariana », filtre contenant ' | aucune erreur SQL | ☐ |
-| 4 | Enregistrer sans nom / prénom / téléphone | message, rien en base | ☐ |
-| 5 | Changer la photo puis redémarrer l'appareil | photo toujours affichée | ☐ |
-| 6 | GPS absent / « abc » / 95 / 200 | rien d'invalide enregistré, message sur la carte | ☐ |
-| 7 | Chaque taille et couleur | appliquées dans la liste et le détail | ☐ |
-| 8 | Activer / désactiver l'appel depuis la liste | bouton visible / masqué, ouvre le composeur sans ouvrir le détail | ☐ |
-| 9 | Relancer l'application | les préférences sont conservées | ☐ |
-| 10 | Rotation : liste, détail en saisie, paramètres, dialogue de suppression | pas de doublon, saisie conservée | ☐ |
-| 11 | Retour depuis chaque écran | écran précédent | ☐ |
-| 12 | App Inspection › Database Inspector | table identique à l'affichage | ☐ |
-| 13 | Bonus : base v1 existante → v2 | contacts conservés, colonne favori ajoutée | ☐ |
+| # | Test | Résultat attendu | Résultat obtenu | Capture |
+|---|---|---|---|---|
+| 1 | Premier lancement / deuxième lancement | 6 contacts de démo, pas de doublon | ✅ 6 contacts, toujours 6 après relance | 01, 12 |
+| 2 | Ajouter (« + »), modifier, supprimer puis redémarrer l'appareil | chaque opération persiste | ✅ ajout « L'Ariana », favori sur Ben Ali, suppression : conservés après redémarrage complet de l'émulateur | 05, 10, 12, 13 |
+| 3 | Nom « L'Ariana », filtre contenant ' | aucune erreur SQL | ✅ enregistrement OK, filtre « o'n » → O'Neil | 02, 10 |
+| 4 | Enregistrer sans nom / prénom / téléphone | message, rien en base | ✅ « Champ obligatoire » ×3 + « Veuillez corriger les champs en erreur » | 07 |
+| 5 | Changer la photo puis redémarrer l'appareil | photo toujours affichée | ✅ photo choisie dans la Galerie (sélecteur Android) → copiée dans `files/photos/photo_….jpg` (stockage interne) → affichée dans le détail et la liste. ⚠️ Contrôle après redémarrage à capturer (l'émulateur a été redémarré, capture non prise) | 24, 25 |
+| 6 | GPS absent / hors limites (95) | rien d'invalide enregistré, message sur la carte | ✅ erreurs sur les champs ; carte : « Coordonnées invalides » ; GPS absent → NULL en base | 08, 09, 23 |
+| 7 | Tailles et couleurs | appliquées dans la liste et le détail | ✅ Grande + Bleu, Petite + Rouge | 17, 19, 21 |
+| 8 | Activer / désactiver l'appel depuis la liste | bouton visible / masqué, composeur sans ouvrir le détail | ✅ bouton masqué par défaut, visible une fois activé ; composeur avec +33 6 12 34 56 78 ; au retour, la liste (pas le détail) | 01, 17, 18 |
+| 9 | Relancer l'application | les préférences sont conservées | ✅ `shared_prefs/com.example.contactsv4_preferences.xml` : taille 14, couleur #C62828, appel true, tri favoris | 21 |
+| 10 | Rotation de la liste | pas de doublon | ✅ liste en paysage, 6 contacts | 22 |
+| 11 | Retour depuis chaque écran | écran précédent | ✅ Paramètres → liste, Carte → détail, détail → liste | — |
+| 12 | Contenu de la table | table identique à l'affichage | ✅ 6 lignes identiques à la liste (lecture de `contacts.db` extrait de l'émulateur) | 23 |
+| 13 | Bonus : base v2, ordre de tri | colonne favori, favoris en tête | ✅ `user_version = 2`, favoris Ben Ali et Trabelsi en tête | 21, 23 |
 
-Tests unitaires automatisés (`./gradlew test`, 22 tests) : filtrage (casse, accents, apostrophe,
-téléphone, id conservé), validation GPS, conversion des préférences et de l'ordre de tri.
+Tests unitaires automatisés (`./gradlew testDebugUnitTest`) : **22 tests, 0 échec** —
+`ContactFilterTest` (8), `CoordinateValidatorTest` (8), `PreferencesManagerTest` (6) : filtrage (casse,
+accents, apostrophe, téléphone, id conservé), validation GPS, conversion des préférences et de l'ordre de tri.
+
+> La capture 23 est générée à partir du fichier `contacts.db` réel copié depuis l'émulateur
+> (`adb exec-out run-as com.example.contactsv4 cat databases/contacts.db`). Pour l'exigence « Database
+> Inspector », ajouter aussi une capture d'Android Studio › *App Inspection › Database Inspector*.
+> Carte : avec `MAPS_API_KEY` renseignée dans `local.properties`, la carte Google Maps affiche le marqueur
+> du contact et sa position (capture 20) ; sans clé, l'application affiche un message explicite.
 
 ## 8. Difficultés rencontrées
 
-_À compléter (exemples : JDK de Gradle incompatible avec Java 25, base non recréée après modification de
-`onCreate`, URI de galerie illisible après redémarrage, conservation de la saisie à la rotation)._
+- **JDK incompatible avec Gradle 8.7** : le JDK fourni avec Android Studio (Java 25) et le JDK système
+  (Java 27) font échouer Gradle. Solution : *Gradle JDK* = JDK 21 (`jbr-21`).
+- **Erreur de compilation Kotlin** dans `PhotoStorage.copierDepuisUri` : « Returns are not allowed for
+  functions with expression body ». La fonction écrite en expression (`= try { … ?: return null … }`) a
+  été réécrite avec un corps en bloc (`{ return try { … } }`).
+- **`local.properties`** : sous Windows, les `\` de `sdk.dir` doivent être doublés (ou remplacés par `/`),
+  sinon Gradle signale « Invalid file path ».
+- **Ancienne version affichée** : l'émulateur exécutait encore la V3 (`com.example.contactsv3`). La V3 a
+  été désinstallée et l'on a vérifié que l'application lancée était bien `com.example.contactsv4` 4.0.
+- **Base non recréée** après modification de `onCreate` : il faut désinstaller l'application ou
+  incrémenter `DATABASE_VERSION` (d'où la migration v1 → v2 du bonus).
 
 ## 9. Questions de compréhension
 
@@ -163,3 +181,43 @@ supprimées à la désinstallation et lorsqu'on efface les données (Paramètres
 Au lancement suivant, `onCreate` recrée la base avec les contacts de démonstration et les préférences
 reprennent leurs valeurs par défaut. (Si la sauvegarde automatique Android est active, ces fichiers
 peuvent être restaurés lors d'une réinstallation.)
+
+## 10. Captures d'écran
+
+### Liste, recherche et détail
+| Liste au premier lancement | Filtre avec apostrophe | Détail d'un contact |
+|---|---|---|
+| ![](captures/01_liste_contacts.png) | ![](captures/02_recherche_apostrophe.png) | ![](captures/03_detail_contact.png) |
+
+### Création et validation
+| Nouveau contact (« + ») | Champs obligatoires | GPS hors limites (95) | Carte : coordonnées invalides | Contact « L'Ariana » ajouté |
+|---|---|---|---|---|
+| ![](captures/06_nouveau_contact.png) | ![](captures/07_validation_champs_obligatoires.png) | ![](captures/08_validation_gps.png) | ![](captures/09_carte_coordonnees_invalides.png) | ![](captures/10_ajout_contact_apostrophe.png) |
+
+### Modification, suppression et persistance
+| Modification (favori) | Modification enregistrée | Confirmation de suppression | Liste après suppression | Liste après redémarrage de l'appareil |
+|---|---|---|---|---|
+| ![](captures/04_detail_favori_boutons.png) | ![](captures/05_modification_enregistree.png) | ![](captures/11_dialogue_suppression.png) | ![](captures/13_apres_suppression.png) | ![](captures/12_persistance_apres_redemarrage.png) |
+
+### Photo
+| Photo choisie dans la Galerie | Photo affichée dans la liste |
+|---|---|
+| ![](captures/24_photo_choisie_galerie.png) | ![](captures/25_photo_enregistree_liste.png) |
+
+### Préférences
+| Paramètres par défaut | Choix de la taille | Paramètres modifiés |
+|---|---|---|
+| ![](captures/14_parametres_defaut.png) | ![](captures/15_choix_taille_police.png) | ![](captures/16_parametres_modifies.png) |
+
+| Liste : Grande + Bleu + boutons Appeler | Détail : Grande + Bleu | Liste : Petite + Rouge + favoris d'abord | Composeur ouvert depuis la liste |
+|---|---|---|---|
+| ![](captures/17_liste_grande_bleu_appel.png) | ![](captures/19_detail_grande_bleu.png) | ![](captures/21_liste_petite_rouge_favoris.png) | ![](captures/18_composeur_depuis_liste.png) |
+
+### Carte, rotation et base de données
+| Carte avec marqueur (Google Maps) | Rotation (paysage) |
+|---|---|
+| ![](captures/20_carte_marqueur.png) | ![](captures/22_rotation_paysage.png) |
+
+Contenu réel de la table `contacts` (fichier `contacts.db` extrait de l'émulateur) :
+
+![](captures/23_table_contacts_sqlite.png)

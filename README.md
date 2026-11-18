@@ -34,6 +34,44 @@ data/   ContactContract · ContactDbHelper (singleton) · ContactDao (seul SQL) 
 util/   PreferencesManager · PhotoStorage · ContactFilter · CoordinateValidator · ImageUtils · Intents
 ```
 
+## Captures d'écran
+
+Captures réelles sur émulateur (Android 37), application `com.example.contactsv4` v4.0.
+Toutes les captures sont dans [`docs/captures/`](docs/captures) ; le détail des tests est dans
+[`docs/COMPTE_RENDU.md`](docs/COMPTE_RENDU.md).
+
+| Liste (SQLite) | Détail | Nouveau contact | Validation |
+|---|---|---|---|
+| <img src="docs/captures/01_liste_contacts.png" width="200"> | <img src="docs/captures/03_detail_contact.png" width="200"> | <img src="docs/captures/06_nouveau_contact.png" width="200"> | <img src="docs/captures/07_validation_champs_obligatoires.png" width="200"> |
+
+| Filtre « o'n » | Ajout « L'Ariana » | Confirmation de suppression | Après redémarrage |
+|---|---|---|---|
+| <img src="docs/captures/02_recherche_apostrophe.png" width="200"> | <img src="docs/captures/10_ajout_contact_apostrophe.png" width="200"> | <img src="docs/captures/11_dialogue_suppression.png" width="200"> | <img src="docs/captures/12_persistance_apres_redemarrage.png" width="200"> |
+
+| Modification (favori) | Modification enregistrée | Liste après suppression |
+|---|---|---|
+| <img src="docs/captures/04_detail_favori_boutons.png" width="200"> | <img src="docs/captures/05_modification_enregistree.png" width="200"> | <img src="docs/captures/13_apres_suppression.png" width="200"> |
+
+| Paramètres par défaut | Choix de la taille | Paramètres modifiés | Détail : Grande + Bleu |
+|---|---|---|---|
+| <img src="docs/captures/14_parametres_defaut.png" width="200"> | <img src="docs/captures/15_choix_taille_police.png" width="200"> | <img src="docs/captures/16_parametres_modifies.png" width="200"> | <img src="docs/captures/19_detail_grande_bleu.png" width="200"> |
+
+| Grande + Bleu + Appeler | Petite + Rouge + favoris | Composeur depuis la liste |
+|---|---|---|
+| <img src="docs/captures/17_liste_grande_bleu_appel.png" width="200"> | <img src="docs/captures/21_liste_petite_rouge_favoris.png" width="200"> | <img src="docs/captures/18_composeur_depuis_liste.png" width="200"> |
+
+| Photo depuis la Galerie | Photo dans la liste |
+|---|---|
+| <img src="docs/captures/24_photo_choisie_galerie.png" width="200"> | <img src="docs/captures/25_photo_enregistree_liste.png" width="200"> |
+
+| GPS invalide | Carte : coordonnées invalides | Carte avec marqueur | Rotation |
+|---|---|---|---|
+| <img src="docs/captures/08_validation_gps.png" width="200"> | <img src="docs/captures/09_carte_coordonnees_invalides.png" width="200"> | <img src="docs/captures/20_carte_marqueur.png" width="200"> | <img src="docs/captures/22_rotation_paysage.png" width="300"> |
+
+Table `contacts` réelle (extraite de l'émulateur) :
+
+<img src="docs/captures/23_table_contacts_sqlite.png" width="800">
+
 ## Bonus réalisés
 - Base en **version 2** : colonne `favori INTEGER NOT NULL DEFAULT 0` ajoutée par `onUpgrade`
   sans perte de données ; case « Contact favori » dans le détail, étoile dans la liste.
