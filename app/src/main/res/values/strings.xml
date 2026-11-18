@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Contacts V4</string>
+    <string name="contact">Contact</string>
+
+    <!-- Titres -->
+    <string name="titre_liste">Mes contacts</string>
+    <string name="titre_detail">Contact</string>
+    <string name="titre_nouveau">Nouveau contact</string>
+    <string name="titre_parametres">Paramètres</string>
+    <string name="titre_carte">Carte — %1$s</string>
+
+    <!-- Liste -->
+    <string name="hint_recherche">Rechercher (nom, prénom, téléphone)</string>
+    <string name="liste_vide">Aucun contact. Appuyez sur « + » pour en ajouter un.</string>
+    <string name="aucun_resultat">Aucun contact ne correspond à « %1$s ».</string>
+    <plurals name="nb_contacts">
+        <item quantity="one">%d contact</item>
+        <item quantity="other">%d contacts</item>
+    </plurals>
+
+    <!-- Détail -->
+    <string name="hint_nom">Nom *</string>
+    <string name="hint_prenom">Prénom *</string>
+    <string name="hint_telephone">Téléphone *</string>
+    <string name="hint_email">Adresse e-mail</string>
+    <string name="favori">Contact favori</string>
+    <string name="hint_latitude">Latitude</string>
+    <string name="hint_longitude">Longitude</string>
+    <string name="helper_latitude">de −90 à 90</string>
+    <string name="helper_longitude">de −180 à 180</string>
+    <string name="section_position">Position GPS</string>
+    <string name="position_enregistree">Latitude : %1$s — Longitude : %2$s</string>
+    <string name="position_absente">Aucune position définie pour ce contact.</string>
+
+    <string name="btn_galerie">Galerie</string>
+    <string name="btn_camera">Caméra</string>
+    <string name="btn_appeler">Appeler</string>
+    <string name="btn_email">E-mail</string>
+    <string name="btn_carte">Voir sur la carte</string>
+    <string name="btn_enregistrer">Enregistrer</string>
+    <string name="btn_annuler">Annuler</string>
+    <string name="btn_supprimer">Supprimer</string>
+    <string name="btn_retour_detail">Retour au contact</string>
+
+    <!-- Messages -->
+    <string name="msg_enregistre">Contact enregistré</string>
+    <string name="msg_cree">Contact ajouté</string>
+    <string name="msg_supprime">Contact supprimé</string>
+    <string name="msg_modifs_annulees">Modifications annulées</string>
+    <string name="msg_corriger_erreurs">Veuillez corriger les champs en erreur</string>
+    <string name="msg_contact_introuvable">Contact introuvable</string>
+    <string name="msg_galerie_annulee">Aucune image sélectionnée</string>
+    <string name="msg_camera_annulee">Prise de photo annulée</string>
+
+    <string name="err_obligatoire">Champ obligatoire</string>
+    <string name="err_email">Adresse e-mail invalide</string>
+    <string name="err_telephone">Numéro de téléphone invalide</string>
+    <string name="err_pas_de_composeur">Aucune application de téléphone disponible</string>
+    <string name="err_pas_de_messagerie">Aucune application de messagerie disponible</string>
+    <string name="err_pas_de_galerie">Aucune application de galerie disponible</string>
+    <string name="err_pas_de_camera">Aucune application caméra disponible</string>
+    <string name="err_numero_vide">Aucun numéro de téléphone pour ce contact</string>
+    <string name="err_copie_photo">Impossible de copier la photo choisie</string>
+    <string name="err_insertion">L\'insertion du contact a échoué</string>
+    <string name="err_contrainte">Enregistrement refusé : une contrainte de la base n\'est pas respectée</string>
+    <string name="err_suppression">La suppression a échoué</string>
+    <string name="err_lecture_base">Impossible de lire la base de contacts</string>
+    <string name="err_camera">Impossible de préparer la prise de photo</string>
+
+    <!-- Carte -->
+    <string name="carte_position_absente">%1$s n\'a aucune position GPS enregistrée.\nSaisissez une latitude et une longitude dans la fiche du contact.</string>
+    <string name="carte_position_invalide">Coordonnées invalides.\nLa latitude doit être comprise entre −90 et 90 et la longitude entre −180 et 180.</string>
+    <string name="carte_cle_absente">Clé Google Maps non configurée.\nAjoutez MAPS_API_KEY dans local.properties puis recompilez (voir README).</string>
+    <string name="coordonnees_affichees">Position : %1$s, %2$s</string>
+
+    <!-- Suppression -->
+    <string name="dialog_suppression_titre">Supprimer le contact ?</string>
+    <string name="dialog_suppression_message">« %1$s » sera définitivement supprimé.</string>
+
+    <!-- Paramètres -->
+    <string name="cat_affichage">Affichage</string>
+    <string name="cat_liste">Liste des contacts</string>
+    <string name="pref_taille">Taille de police</string>
+    <string name="pref_couleur">Couleur préférée du texte</string>
+    <string name="pref_appel">Activer l\'appel depuis la liste</string>
+    <string name="pref_appel_on">Oui : un bouton Appeler est affiché sur chaque ligne</string>
+    <string name="pref_appel_off">Non</string>
+    <string name="pref_ordre">Ordre de tri</string>
+
+    <!-- Accessibilité -->
+    <string name="cd_ajouter">Ajouter un contact</string>
+    <string name="cd_favori">Favori</string>
+    <string name="cd_appeler">Appeler %1$s</string>
+    <string name="cd_photo">Photo du contact</string>
+    <string name="cd_position_ok">Position GPS disponible</string>
+    <string name="cd_position_absente">Pas de position GPS</string>
+</resources>
